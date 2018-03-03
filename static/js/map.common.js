@@ -1167,14 +1167,6 @@ function getPokemonRarity(pokemonId) {
     return ''
 }
 
-function getPokemonRarity_noi8(pokemonId) {
-    if (pokemonRarities.hasOwnProperty(pokemonId)) {
-        return pokemonRarities[pokemonId]
-    }
-
-    return ''
-}
-
 function getGoogleSprite(index, sprite, displayHeight) {
     displayHeight = Math.max(displayHeight, 3)
     var scale = displayHeight / sprite.iconHeight
@@ -1217,7 +1209,7 @@ function setupPokemonMarkerDetails(item, map, scaleByRarity = true, isNotifyPkmn
             'legendary': 50
         }
 
-        const pokemonRarity = getPokemonRarity_noi8(item['pokemon_id']).toLowerCase()
+        const pokemonRarity = getPokemonRarity(item['pokemon_id']).toLowerCase()
         if (rarityValues.hasOwnProperty(pokemonRarity)) {
             rarityValue = rarityValues[pokemonRarity] 
             
