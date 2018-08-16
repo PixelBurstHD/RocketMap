@@ -897,9 +897,8 @@ function gymLabel(gym, includeMembers = true) {
                     <div class='raid container content-right'>
                         <div>
                         <div class='raid pokemon'>
-                            ${raid['pokemon_name']} <a href='http://pokemon.gameinfo.io/en/pokemon/${raid['pokemon_id']}' target='_blank' title='View in Pokédex'>#${raid['pokemon_id']}</a> | CP: ${raid['cp']}
+                            ${raid['pokemon_name']} <a href='http://pokemon.gameinfo.io/en/pokemon/${raid['pokemon_id']}' target='_blank' title='View in Pokédex'>#${raid['pokemon_id']}</a>
                     </div>
-                        ${raidStr}
                     </div>
                     </div>
                 </div>
@@ -912,7 +911,7 @@ function gymLabel(gym, includeMembers = true) {
                 `
             }
         } else {
-            let gymUrl = `gym_img?team=${gymTypes[gym.team_id]}&level=${getGymLevel(gym)}&raidlevel=${raid.level}`
+            let gymUrl = `gym_img?team=${gymTypes[gym.team_id]}&level=0&raidlevel=${raid.level}`
             if (gym.is_in_battle) {
                 gymUrl += '&in_battle=1'
             }
@@ -929,7 +928,7 @@ function gymLabel(gym, includeMembers = true) {
                 </div>`
         }
     } else {
-        let gymUrl = `gym_img?team=${teamName}&level=${getGymLevel(gym)}`
+        let gymUrl = `gym_img?team=${teamName}&level=0`
         if (gym.is_in_battle) {
             gymUrl += '&in_battle=1'
         }
@@ -1374,13 +1373,13 @@ function updateGymMarker(item, marker) {
     let markerImage = ''
     var zIndexOffset
     if (item.raid && isOngoingRaid(item.raid) && Store.get('showRaids') && raidLevel >= Store.get('showRaidMinLevel') && raidLevel <= Store.get('showRaidMaxLevel')) {
-        markerImage = 'gym_img?team=' + gymTypes[item.team_id] + '&level=' + getGymLevel(item) + '&raidlevel=' + item['raid']['level'] + '&pkm=' + item['raid']['pokemon_id']
+        markerImage = 'gym_img?team=' + gymTypes[item.team_id] + '&level=0' + '&raidlevel=' + item['raid']['level'] + '&pkm=' + item['raid']['pokemon_id']
         zIndexOffset = 100
     } else if (item.raid && item.raid.end > Date.now() && Store.get('showRaids') && !Store.get('showActiveRaidsOnly') && raidLevel >= Store.get('showRaidMinLevel') && raidLevel <= Store.get('showRaidMaxLevel')) {
-        markerImage = 'gym_img?team=' + gymTypes[item.team_id] + '&level=' + getGymLevel(item) + '&raidlevel=' + item['raid']['level']
+        markerImage = 'gym_img?team=' + gymTypes[item.team_id] + '&level=0' + '&raidlevel=' + item['raid']['level']
         zIndexOffset = 20
     } else {
-        markerImage = 'gym_img?team=' + gymTypes[item.team_id] + '&level=' + getGymLevel(item)
+        markerImage = 'gym_img?team=' + gymTypes[item.team_id] + '&level=0'
         zIndexOffset = 10
     }
     if (item['is_in_battle']) {
